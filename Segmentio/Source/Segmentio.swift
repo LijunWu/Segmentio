@@ -323,8 +323,10 @@ open class Segmentio: UIView {
         segmentioCollectionView?.collectionViewLayout.invalidateLayout()
         segmentioCollectionView?.reloadData()
         guard selectedSegmentioIndex != -1 else { return }
-        scrollToItemAtContext()
-        moveShapeLayerAtContext()
+        DispatchQueue.main.async { [weak self] in
+            self?.scrollToItemAtContext()
+            self?.moveShapeLayerAtContext()
+        }
     }
 
     // MARK: Move shape layer to item
